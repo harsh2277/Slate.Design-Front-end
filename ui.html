@@ -3,8 +3,15 @@
 
 <head>
   <style>
+    /* ========================================
+       GOOGLE FONTS IMPORT
+       Importing Instrument Serif and Poppins fonts
+       ======================================== */
     @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap');
 
+    /* ========================================
+       CSS VARIABLES (DESIGN TOKENS)
+       ======================================== */
     :root {
       /* Primary Color Shades */
       --primary-100: #E6EEFF;
@@ -81,6 +88,9 @@
       --text-12px: 400 12px/16px var(--font-secondary);
     }
 
+    /* ========================================
+       GLOBAL STYLES
+       ======================================== */
     body {
       margin: 0;
       padding: 0;
@@ -89,7 +99,11 @@
       overflow: hidden;
     }
 
-    /* Welcome Screen */
+    /* ========================================
+       WELCOME SCREEN STYLES
+       ======================================== */
+
+    /* Welcome Screen Container */
     .welcome-container {
       display: flex;
       flex-direction: column;
@@ -108,8 +122,7 @@
       margin-bottom: var(--spacing-xl);
     }
 
-    /* <!-- Welcome Screen Css Start --> */
-
+    /* Welcome Text Section */
     .welcome-text {
       display: flex;
       flex-direction: column;
@@ -118,6 +131,7 @@
       text-align: center;
     }
 
+    /* Welcome Title - "Slate.Design" */
     .welcome-title {
       font: var(--text-40px);
       font-weight: var(--font-regular);
@@ -125,6 +139,7 @@
       margin: 0;
     }
 
+    /* Welcome Subtitle - Description text */
     .welcome-subtitle {
       font: var(--text-14px);
       font-weight: var(--font-regular);
@@ -132,6 +147,16 @@
       margin: 0;
     }
 
+    /* Building Feature Text - Larger subtitle */
+    .welcome-subtitle-large {
+      font: var(--text-18px);
+      font-weight: var(--font-semibold);
+      color: var(--neutral-600);
+      margin: 0;
+      line-height: 175%;
+    }
+
+    /* Get Started Button */
     .btn-get-started {
       background: var(--primary-600);
       color: var(--neutral-100);
@@ -149,8 +174,16 @@
       background: var(--primary-700);
     }
 
-    /* footer start */
+    /* Go to Home Screen Button - Specific styling */
+    #goToHomeBtn {
+      width: 224px;
+      height: 48px;
+    }
 
+    /* ========================================
+       FOOTER STYLES
+       Footer with CODETHEOREM logo (right side)
+       ======================================== */
     .footer {
       position: fixed;
       bottom: 0;
@@ -161,6 +194,7 @@
       border-top: 1px solid var(--neutral-300);
     }
 
+    /* Footer Content Container */
     .footer-content {
       display: flex;
       align-items: center;
@@ -168,11 +202,13 @@
       max-width: 100%;
     }
 
+    /* Footer Logo - CODETHEOREM logo on right side */
     .footer-logo {
       display: flex;
       align-items: center;
     }
 
+    /* Footer URL Link */
     .footer-url {
       font: var(--text-14px);
       font-weight: var(--font-regular);
@@ -187,12 +223,10 @@
       color: var(--primary-600);
     }
 
-    /* footer end */
-
-    /* <!-- Welcome Screen Css End --> */
-
-    /* <!-- Onboarding Screen Css Start --> */
-
+    /* ========================================
+       TOPBAR STYLES
+       Topbar with Slate.Design logo (left) and CODETHEOREM logo (right)
+       ======================================== */
     .topbar {
       background: var(--neutral-100);
       padding: var(--spacing-md) var(--spacing-md);
@@ -205,12 +239,14 @@
       box-sizing: border-box;
     }
 
+    /* Topbar Left - Slate.Design logo */
     .topbar-left {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
     }
 
+    /* Topbar Title */
     .topbar-title {
       font: var(--text-20px);
       font-weight: var(--font-semibold);
@@ -218,12 +254,14 @@
       margin: 0;
     }
 
+    /* Topbar Right - CODETHEOREM logo */
     .topbar-right {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
     }
 
+    /* Topbar Brand Text */
     .topbar-brand {
       font: var(--text-14px);
       font-weight: var(--font-semibold);
@@ -231,12 +269,18 @@
       letter-spacing: 0.05em;
     }
 
+    /* ========================================
+       SETUP SCREEN STYLES (AUTO & MANUAL)
+       ======================================== */
+
+    /* Setup Screen Wrapper - Gray background */
     .setup-screen-wrapper {
       background: var(--neutral-200);
       padding: var(--spacing-xs);
       min-height: 100vh;
     }
 
+    /* Setup Screen Content - White card container */
     .setup-screen-content {
       background: var(--neutral-100);
       border: 1px solid var(--neutral-300);
@@ -248,6 +292,7 @@
       justify-content: flex-start;
     }
 
+    /* Setup Main Content Area */
     .setup-main-content {
       flex: 1;
       display: flex;
@@ -257,6 +302,11 @@
       width: 100%;
     }
 
+    /* ========================================
+       ONBOARDING SCREEN STYLES
+       ======================================== */
+
+    /* Onboarding Container */
     .onboarding-container {
       display: flex;
       flex-direction: column;
@@ -266,12 +316,14 @@
       min-height: calc(100vh - 168px);
     }
 
+    /* Onboarding Content Wrapper */
     .onboarding-content {
       display: flex;
       flex-direction: column;
       gap: var(--spacing-md);
     }
 
+    /* Onboarding Cards Container */
     .onboarding-cards {
       display: flex;
       flex-direction: column;
@@ -279,6 +331,7 @@
       margin-bottom: var(--spacing-xl);
     }
 
+    /* Setup Card - Auto/Manual setup options */
     .setup-card {
       flex: 1;
       background: var(--neutral-100);
@@ -289,6 +342,7 @@
       transition: all 0.3s ease;
     }
 
+    /* Auto Setup Card - Hover, Active, and Selected states */
     #autoSetupCard:hover,
     #autoSetupCard:active,
     #autoSetupCard.selected {
@@ -296,6 +350,7 @@
       border-color: var(--primary-600);
     }
 
+    /* Manual Setup Card - Hover, Active, and Selected states */
     #manualSetupCard:hover,
     #manualSetupCard:active,
     #manualSetupCard.selected {
@@ -303,6 +358,7 @@
       border-color: var(--primary-600);
     }
 
+    /* Setup Card Title */
     .setup-card-title {
       font: var(--text-24px);
       font-family: var(--font-primary);
@@ -311,6 +367,7 @@
       margin: 0 0 var(--spacing-sm) 0;
     }
 
+    /* Setup Card Description */
     .setup-card-description {
       font: var(--text-16px);
       font-weight: var(--font-regular);
@@ -318,11 +375,13 @@
       margin: 0;
     }
 
+    /* Onboarding Header Section */
     .onboarding-header {
       display: flex;
       flex-direction: column;
     }
 
+    /* Onboarding Title */
     .onboarding-title {
       font: var(--text-28px);
       font-weight: var(--font-medium);
@@ -331,6 +390,7 @@
       margin: 0;
     }
 
+    /* Onboarding Subtitle */
     .onboarding-subtitle {
       font: var(--text-16px);
       font-weight: var(--font-regular);
@@ -339,15 +399,90 @@
       gap: var(--spacing-xs);
     }
 
-    /* <!-- Onboarding Screen Css End --> */
+    /* ========================================
+       TAB BAR STYLES (MANUAL SETUP)
+       ======================================== */
+
+    /* Tab Bar Container */
+    .tab-bar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid var(--neutral-300);
+      background: var(--neutral-100);
+    }
+
+    /* Tab Navigation Container */
+    .tab-nav {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0;
+    }
+
+    /* Individual Tab Item */
+    .tab-item {
+      font: var(--text-16px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-600);
+      padding: var(--spacing-md) 0;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex: 1;
+      text-align: center;
+    }
+
+    /* Tab Item Hover State */
+    .tab-item:hover {
+      color: var(--neutral-1000);
+    }
+
+    /* Tab Item Active State */
+    .tab-item.active {
+      color: var(--neutral-100);
+      background: var(--primary-600);
+      border-bottom-color: transparent;
+    }
+
+    /* ========================================
+       TAB CONTENT STYLES
+       ======================================== */
+
+    /* Tab Content Container */
+    .tab-content {
+      display: none;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Active Tab Content */
+    .tab-content.active {
+      display: flex;
+    }
+
+    /* Tab Content Text */
+    .tab-content-text {
+      font: var(--text-28px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-600);
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
-  <!-- Welcome Screen -->
+  <!-- ========================================
+       WELCOME SCREEN
+       First screen with Slate.Design logo and Get Started button
+       ======================================== -->
   <div>
     <div class="welcome-container" id="welcomeScreen">
       <div class="welcome-content">
+        <!-- Slate.Design Circular Logo Icon -->
         <div class="welcome-logo">
           <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -366,18 +501,24 @@
           </svg>
         </div>
 
+        <!-- Welcome Text Section -->
         <div class="welcome-text">
           <h1 class="welcome-title">Slate.Design</h1>
           <p class="welcome-subtitle">Create beautiful design systems with ease</p>
         </div>
       </div>
 
+      <!-- Get Started Button -->
       <button class="btn-get-started" id="getStartedBtn">Get Started</button>
     </div>
 
-    <!-- Footer -->
+    <!-- ========================================
+         FOOTER
+         Contains CODETHEOREM logo on right side
+         ======================================== -->
     <footer class="footer">
       <div class="footer-content">
+        <!-- CODETHEOREM Logo (Right Side) -->
         <div class="footer-logo">
           <svg width="124" height="18" viewBox="0 0 124 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_114_1841)">
@@ -442,14 +583,20 @@
         <a href="https://codetheorem.co/" target="_blank" class="footer-url">www.codetheorem.co</a>
       </div>
     </footer>
-    <!-- Footer End -->
   </div>
-  <!-- Welcome Screen End -->
+  <!-- End Welcome Screen -->
 
-  <!-- Onboarding Screen -->
+  <!-- ========================================
+       ONBOARDING SCREEN
+       Setup selection screen with Auto and Manual options
+       ======================================== -->
   <div id="onboardingScreen" style="display: none;">
-    <!-- Top Bar -->
+    <!-- ========================================
+         TOPBAR
+         Slate.Design logo (left) and CODETHEOREM logo (right)
+         ======================================== -->
     <div class="topbar">
+      <!-- Slate.Design Logo (Left Side) -->
       <svg width="124" height="23" viewBox="0 0 124 23" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M11.2728 20.2983C11.2728 20.8431 10.83 21.2898 10.288 21.2354C8.6851 21.0746 7.14059 20.5229 5.79281 19.6223C4.17074 18.5385 2.9065 16.998 2.15995 15.1957C1.41339 13.3933 1.21806 11.4101 1.59865 9.4967C1.97924 7.58336 2.91866 5.82582 4.29812 4.44638C5.67756 3.06691 7.4351 2.12749 9.34845 1.7469C11.2618 1.36631 13.2451 1.56165 15.0474 2.3082C16.8498 3.05476 18.3902 4.31899 19.4741 5.94107C20.3746 7.28884 20.9263 8.83335 21.0871 10.4363C21.1415 10.9783 20.6948 11.421 20.15 11.421C19.6053 11.421 19.17 10.9777 19.1021 10.4372C18.9498 9.22513 18.5175 8.06024 17.8338 7.03707C16.9668 5.73941 15.7344 4.728 14.2925 4.13076C12.8506 3.53353 11.264 3.37726 9.73332 3.68172C8.20263 3.9862 6.7966 4.73773 5.69305 5.8413C4.58947 6.94485 3.83795 8.35088 3.53346 9.88157C3.229 11.4123 3.38528 12.9988 3.98251 14.4407C4.57974 15.8826 5.59115 17.115 6.88882 17.9821C7.91199 18.6657 9.07688 19.0981 10.2889 19.2504C10.8294 19.3183 11.2728 19.7535 11.2728 20.2983Z"
@@ -502,31 +649,39 @@
       </svg>
     </div>
 
-    <!-- Onboarding Content -->
+    <!-- ========================================
+         ONBOARDING CONTENT
+         Setup selection cards and continue button
+         ======================================== -->
     <div class="onboarding-container">
       <div class="onboarding-content">
+        <!-- Onboarding Header -->
         <div class="onboarding-header">
           <h1 class="onboarding-title">Set up your Design System</h1>
           <p class="onboarding-subtitle">Choose how you want to create your styles and variables in Figma.</p>
         </div>
 
+        <!-- Setup Selection Cards -->
         <div class="onboarding-cards">
+          <!-- Auto Setup Card -->
           <div class="setup-card" id="autoSetupCard">
             <h2 class="setup-card-title">Auto set up card</h2>
             <p class="setup-card-description">Create all styles in one click.</p>
           </div>
 
+          <!-- Manual Setup Card -->
           <div class="setup-card" id="manualSetupCard">
             <h2 class="setup-card-title">Manual set up card</h2>
             <p class="setup-card-description">Create variables step by step.</p>
           </div>
         </div>
 
+        <!-- Continue Button -->
         <button class="btn-get-started" id="continueBtn">Continue</button>
       </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer (Same as Welcome Screen) -->
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-logo">
@@ -593,16 +748,22 @@
         <a href="https://codetheorem.co/" target="_blank" class="footer-url">www.codetheorem.co</a>
       </div>
     </footer>
-    <!-- Footer End -->
   </div>
-  <!-- Onboarding Screen End -->
+  <!-- End Onboarding Screen -->
 
-  <!-- Auto Setup Screen -->
+  <!-- ========================================
+       AUTO SETUP SCREEN
+       Automatic setup configuration screen
+       ======================================== -->
   <div id="autoSetupScreen" style="display: none;">
     <div class="setup-screen-wrapper">
       <div class="setup-screen-content">
-        <!-- Top Bar -->
+        <!-- ========================================
+             TOPBAR
+             Slate.Design logo (left) and CODETHEOREM logo (right)
+             ======================================== -->
         <div class="topbar">
+          <!-- Slate.Design Logo (Left Side) -->
           <div class="topbar-left">
             <svg width="124" height="23" viewBox="0 0 124 23" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -655,6 +816,7 @@
               </defs>
             </svg>
           </div>
+          <!-- CODETHEOREM Logo (Right Side) -->
           <div class="topbar-right">
             <svg width="124" height="18" viewBox="0 0 124 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_manual)">
@@ -719,19 +881,67 @@
           </div>
         </div>
 
+        <!-- Auto Setup Main Content -->
         <div class="setup-main-content">
-          <h1 class="welcome-title">Auto setup screen</h1>
+          <div class="welcome-content">
+            <!-- Emoji Icon -->
+            <div class="welcome-logo">
+              <svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_104_3969)">
+                  <path
+                    d="M124 62C124 96.2356 96.2356 124 62 124C46.3838 124 32.1044 118.226 21.1962 108.674C8.215 97.3013 0 80.6194 0 62C0 27.7644 27.7644 0 62 0C80.6194 0 97.3013 8.215 108.674 21.1962C118.226 32.1044 124 46.3838 124 62Z"
+                    fill="#FFCC4D" />
+                  <path
+                    d="M86.0056 78.9531C85.1531 84.6493 82.2081 89.7062 77.965 93.3293C73.7025 96.9718 68.1225 99.1612 62.0194 99.1612C55.9163 99.1612 50.3169 96.9718 46.0544 93.3293C41.7919 89.7062 38.8663 84.6493 38.0138 78.9531C37.7425 77.1512 39.1956 75.5237 41.0363 75.5237H83.0025C84.8238 75.5431 86.2769 77.1512 86.0056 78.9531Z"
+                    fill="#2E435A" />
+                  <path
+                    d="M77.9457 93.3486C73.6832 96.9911 68.1032 99.1804 62 99.1804C55.8969 99.1804 50.2975 96.9911 46.035 93.3486C49.7744 89.6867 55.5288 87.3617 62 87.3617C68.4713 87.3423 74.2257 89.6867 77.9457 93.3486Z"
+                    fill="#D3333F" />
+                  <path
+                    d="M13.9694 47.1782C13.4463 47.1782 12.9038 47.062 12.4 46.8295C10.5788 45.9576 9.78439 43.7876 10.6563 41.947C13.64 35.6501 18.9681 31.0582 24.9356 29.6438C30.1281 28.4232 35.495 29.702 40.0288 33.267C41.6175 34.5263 41.8888 36.8126 40.6488 38.4207C39.3894 40.0095 37.1031 40.2807 35.495 39.0407C32.6663 36.8126 29.6825 36.057 26.6213 36.7738C22.8625 37.6651 19.2781 40.8426 17.2825 45.0663C16.6625 46.4032 15.345 47.1782 13.9694 47.1782ZM110.031 47.1782C108.655 47.1782 107.338 46.4032 106.718 45.0857C104.722 40.862 101.138 37.6651 97.3788 36.7932C94.3175 36.0763 91.3338 36.832 88.505 39.0601C86.9163 40.3195 84.6106 40.0288 83.3513 38.4401C82.0919 36.8513 82.3825 34.5457 83.9713 33.2863C88.505 29.7213 93.8719 28.4232 99.0644 29.6632C105.032 31.0776 110.379 35.6695 113.344 41.9663C114.216 43.7876 113.421 45.977 111.6 46.8488C111.096 47.062 110.554 47.1782 110.031 47.1782Z"
+                    fill="#2E435A" />
+                  <path
+                    d="M105.245 58.8418C105.245 64.3443 100.789 68.8006 95.2862 68.8006C89.7837 68.8006 85.3275 64.3443 85.3275 58.8418C85.3275 53.3393 89.7837 48.8831 95.2862 48.8831C100.789 48.9024 105.245 53.3587 105.245 58.8418Z"
+                    fill="#2E435A" />
+                  <path
+                    d="M28.6943 68.8006C34.1944 68.8006 38.6531 64.3419 38.6531 58.8418C38.6531 53.3417 34.1944 48.8831 28.6943 48.8831C23.1943 48.8831 18.7356 53.3417 18.7356 58.8418C18.7356 64.3419 23.1943 68.8006 28.6943 68.8006Z"
+                    fill="#2E435A" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_104_3969">
+                    <rect width="124" height="124" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+
+            <!-- Description Text -->
+            <div class="welcome-text">
+              <p class="welcome-subtitle-large">We're building this feature. <br>Thanks for using the plugin 🙌</p>
+            </div>
+          </div>
+
+          <!-- Go to Home Screen Button -->
+          <button class="btn-get-started" id="goToHomeBtn">Go to Home Screen</button>
         </div>
       </div>
     </div>
   </div>
+  <!-- End Auto Setup Screen -->
 
-  <!-- Manual Setup Screen -->
+  <!-- ========================================
+       MANUAL SETUP SCREEN
+       Manual setup configuration screen
+       ======================================== -->
   <div id="manualSetupScreen" style="display: none;">
     <div class="setup-screen-wrapper">
       <div class="setup-screen-content">
-        <!-- Top Bar -->
+        <!-- ========================================
+             TOPBAR
+             Slate.Design logo (left) and CODETHEOREM logo (right)
+             ======================================== -->
         <div class="topbar">
+          <!-- Slate.Design Logo (Left Side) -->
           <div class="topbar-left">
             <svg width="124" height="23" viewBox="0 0 124 23" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -784,6 +994,7 @@
               </defs>
             </svg>
           </div>
+          <!-- CODETHEOREM Logo (Right Side) -->
           <div class="topbar-right">
             <svg width="124" height="18" viewBox="0 0 124 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_61_11727_auto)">
@@ -847,12 +1058,65 @@
             </svg>
           </div>
         </div>
+
+        <!-- ========================================
+             TAB BAR
+             Navigation tabs for manual setup sections
+             ======================================== -->
+        <div class="tab-bar">
+          <div class="tab-nav">
+            <div class="tab-item active" data-tab="colors">Colors</div>
+            <div class="tab-item" data-tab="tokens">Tokens</div>
+            <div class="tab-item" data-tab="typography">Typography</div>
+            <div class="tab-item" data-tab="components">Components</div>
+            <div class="tab-item" data-tab="icon-libraries">Icon libraries</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             TAB CONTENT AREA
+             Content for each tab section
+             ======================================== -->
+        <div class="setup-main-content">
+          <!-- Colors Tab Content -->
+          <div class="tab-content active" id="colorsContent">
+            <div class="tab-content-text">Colors</div>
+          </div>
+
+          <!-- Tokens Tab Content -->
+          <div class="tab-content" id="tokensContent">
+            <div class="tab-content-text">Tokens</div>
+          </div>
+
+          <!-- Typography Tab Content -->
+          <div class="tab-content" id="typographyContent">
+            <div class="tab-content-text">Typography</div>
+          </div>
+
+          <!-- Components Tab Content -->
+          <div class="tab-content" id="componentsContent">
+            <div class="tab-content-text">Components</div>
+          </div>
+
+          <!-- Icon Libraries Tab Content -->
+          <div class="tab-content" id="iconlibrariesContent">
+            <div class="tab-content-text">Icon libraries</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <!-- End Manual Setup Screen -->
 
+  <!-- ========================================
+       JAVASCRIPT
+       Page navigation and interaction logic
+       ======================================== -->
   <script>
-    // Page Management Variables
+    /* ========================================
+       PAGE MANAGEMENT VARIABLES
+       ======================================== */
+    // Page identifiers for navigation
     const PAGES = {
       WELCOME: 'welcomeScreen',
       ONBOARDING: 'onboardingScreen',
@@ -860,11 +1124,16 @@
       MANUAL_SETUP: 'manualSetupScreen'
     };
 
+    // Track which setup option is selected (auto or manual)
     let selectedSetup = null;
 
+    // Track current active page
     let currentPage = PAGES.WELCOME;
 
-    // Page Navigation Functions
+    /* ========================================
+       PAGE NAVIGATION FUNCTIONS
+       ======================================== */
+    // Function to show a specific page and hide others
     function showPage(pageName) {
       // Hide all pages
       Object.values(PAGES).forEach(page => {
@@ -893,12 +1162,18 @@
       }
     }
 
-    // Event Listeners
+    /* ========================================
+       EVENT LISTENERS
+       ======================================== */
+    // Get Started button - Navigate from Welcome to Onboarding
     document.getElementById('getStartedBtn').addEventListener('click', function () {
       showPage(PAGES.ONBOARDING);
     });
 
-    // Card Selection
+    /* ========================================
+       SETUP CARD SELECTION
+       Handle auto/manual setup card clicks
+       ======================================== */
     const autoSetupCard = document.getElementById('autoSetupCard');
     const manualSetupCard = document.getElementById('manualSetupCard');
 
@@ -916,7 +1191,10 @@
       });
     }
 
-    // Continue Button
+    /* ========================================
+       CONTINUE BUTTON
+       Navigate to selected setup screen
+       ======================================== */
     const continueBtn = document.getElementById('continueBtn');
     if (continueBtn) {
       continueBtn.addEventListener('click', function () {
@@ -930,8 +1208,52 @@
       });
     }
 
-    // Initialize
+    /* ========================================
+       INITIALIZATION
+       Show welcome screen on load
+       ======================================== */
     showPage(PAGES.WELCOME);
+
+    /* ========================================
+       GO TO HOME SCREEN BUTTON
+       Navigate from Auto Setup back to Onboarding
+       ======================================== */
+    const goToHomeBtn = document.getElementById('goToHomeBtn');
+    if (goToHomeBtn) {
+      goToHomeBtn.addEventListener('click', function () {
+        parent.postMessage({ pluginMessage: { type: 'resize', width: 424, height: 700 } }, '*');
+        showPage(PAGES.ONBOARDING);
+      });
+    }
+
+    /* ========================================
+       TAB SWITCHING FUNCTIONALITY
+       Handle tab navigation in manual setup screen
+       ======================================== */
+    const tabItems = document.querySelectorAll('.tab-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabItems.forEach(tabItem => {
+      tabItem.addEventListener('click', function () {
+        const tabName = this.getAttribute('data-tab');
+
+        // Remove active class from all tabs
+        tabItems.forEach(item => item.classList.remove('active'));
+
+        // Add active class to clicked tab
+        this.classList.add('active');
+
+        // Hide all tab contents
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        // Show corresponding tab content
+        const contentId = tabName.replace(/-/g, '') + 'Content';
+        const activeContent = document.getElementById(contentId);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
   </script>
 </body>
 
