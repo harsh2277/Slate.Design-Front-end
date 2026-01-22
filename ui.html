@@ -290,16 +290,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      overflow: hidden;
     }
 
     /* Setup Main Content Area */
     .setup-main-content {
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 100%;
+      overflow: hidden;
+      flex: 1;
+      height: calc(100vh - 168px);
     }
 
     /* ========================================
@@ -455,8 +458,10 @@
       display: none;
       width: 100%;
       height: 100%;
+      overflow: hidden;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
 
     /* Active Tab Content */
@@ -470,6 +475,485 @@
       font-weight: var(--font-medium);
       color: var(--neutral-600);
       text-align: center;
+    }
+
+    /* ========================================
+       SIDEBAR STYLES (COLORS TAB)
+       ======================================== */
+
+    /* Sidebar Container */
+    .sidebar {
+      width: 250px;
+      height: 100%;
+      background: var(--neutral-100);
+      border-right: 1px solid var(--neutral-300);
+      padding: var(--spacing-md);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    /* Sidebar Content Container - Wraps both groups with auto gap */
+    .sidebar-content-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      gap: 68px;
+    }
+
+    /* Sidebar Colors Group */
+    .sidebar-colors-group {
+      display: flex;
+      height: 314px;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    /* Sidebar Controls Group (Toggles + Button) */
+    .sidebar-controls-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      padding-top: var(--spacing-md);
+      border-top: 1px solid var(--neutral-300);
+      margin-left: calc(var(--spacing-md) * -1);
+      margin-right: calc(var(--spacing-md) * -1);
+      padding-left: var(--spacing-md);
+      padding-right: var(--spacing-md);
+    }
+
+    /* Color Item Container */
+    .color-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+
+    /* First Color Item - Remove extra top padding since sidebar has padding */
+    .color-item:first-child {
+      padding-top: 0;
+    }
+
+    /* Last element in sidebar - Remove bottom spacing */
+    .sidebar>*:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Color Item Label */
+    .color-item-label {
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-1000);
+      margin: 0;
+    }
+
+    /* Color Input Container */
+    .color-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      background: var(--neutral-100);
+      border: 1px solid var(--neutral-300);
+      border-radius: 24px;
+      padding: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) var(--spacing-sm);
+    }
+
+    /* Color Hex Input */
+    .color-hex-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-1000);
+      outline: none;
+    }
+
+    /* Color Preview Circle */
+    .color-preview {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--neutral-300);
+    }
+
+    /* Toggle Container */
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--neutral-100);
+      border: 1px solid var(--neutral-300);
+      border-radius: 24px;
+      padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) var(--spacing-md);
+    }
+
+    /* Toggle Label */
+    .toggle-label {
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-1000);
+      margin: 0;
+    }
+
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      background: var(--neutral-400);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: var(--neutral-100);
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-switch.active {
+      background: var(--primary-600);
+    }
+
+    .toggle-switch.active::after {
+      transform: translateX(16px);
+    }
+
+    /* Add Colors Button */
+    .btn-add-colors {
+      background: var(--neutral-100);
+      color: var(--primary-600);
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      border: 1px solid var(--primary-600);
+      border-radius: 24px;
+      padding: var(--spacing-sm) var(--spacing-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .btn-add-colors:hover {
+      background: var(--primary-100);
+    }
+
+    /* Tab Content with Sidebar Layout */
+    .tab-content-with-sidebar {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Tab Content with Sidebar - Main Row */
+    .tab-content-main-row {
+      display: flex;
+      flex: 1;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Main Content Area (next to sidebar) */
+    .main-content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px;
+      padding-bottom: 70px;
+      overflow-y: auto;
+    }
+
+    /* Color Shades Card */
+    .color-shades-card {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 8px;
+      gap: 8px;
+      width: 100%;
+      height: fit-content;
+      background: #FAFAFA;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      flex: none;
+      align-self: stretch;
+    }
+
+    /* Color Shades Header */
+    .color-shades-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px;
+      gap: 8px;
+      width: 100%;
+      height: 23px;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .color-shades-title {
+      min-width: 60px;
+      height: 19px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 160%;
+      color: #000000;
+      margin: 0;
+      flex: none;
+      white-space: nowrap;
+    }
+
+    .color-shades-dropdown {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 2px 4px 2px 10px;
+      gap: 6px;
+      width: 46px;
+      height: 23px;
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      cursor: pointer;
+      flex: none;
+    }
+
+    .color-shades-dropdown span {
+      width: 12px;
+      height: 19px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 160%;
+      color: rgba(0, 0, 0, 0.7);
+      flex: none;
+    }
+
+    .color-shades-dropdown svg {
+      width: 14px;
+      height: 14px;
+      flex: none;
+    }
+
+    /* Color Shades Grid */
+    .color-shades-grid {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 2px;
+      width: 100%;
+      flex: none;
+      align-self: stretch;
+    }
+
+    /* Individual Shade Item */
+    .shade-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 8px;
+      isolation: isolate;
+      height: 57.93px;
+      flex: 1;
+      position: relative;
+    }
+
+    .shade-item>div {
+      box-sizing: border-box;
+      width: 100%;
+      height: 64px;
+      border-radius: 4px;
+      flex: 1;
+      position: relative;
+    }
+
+    .shade-item:first-child>div {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* Shade Text */
+    .shade-text {
+      position: absolute;
+      width: 13px;
+      height: 12px;
+      left: 6px;
+      bottom: 6.93px;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 10px;
+      line-height: 12px;
+      margin: 0;
+      flex: none;
+      z-index: 2;
+    }
+
+    /* Selected Shade Indicator */
+    .shade-item.selected::before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      right: 6px;
+      top: 3.5px;
+      background: #FFFFFF;
+      border: 0.8px solid #000000;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    /* Bottom Action Bar */
+    .bottom-action-bar {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      gap: 8px;
+      width: calc(100% - 250px);
+      height: 58px;
+      background: #FFFFFF;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    /* Bottom Action Bar Text */
+    .bottom-action-text {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 160%;
+      color: rgba(0, 0, 0, 0.8);
+      margin: 0;
+      flex: none;
+    }
+
+    /* Add Variables Button */
+    .btn-add-variables {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+      gap: 8px;
+      width: 164px;
+      height: 40px;
+      background: #1350FF;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      flex: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn-add-variables:hover {
+      background: #0F40CC;
+    }
+
+    /* Add Variables Button Icon */
+    .btn-add-variables-icon {
+      width: 18px;
+      height: 18px;
+      flex: none;
+    }
+
+    /* Add Variables Button Text */
+    .btn-add-variables-text {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      text-align: center;
+      color: #FFFFFF;
+      margin: 0;
+      flex: none;
+    }
+
+    /* Building Feature Screen */
+    .building-feature-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: var(--spacing-lg);
+      padding: var(--spacing-xl);
+    }
+
+    .building-feature-emoji {
+      font-size: 120px;
+      line-height: 1;
+    }
+
+    .building-feature-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+      text-align: center;
+    }
+
+    .building-feature-title {
+      font: var(--text-24px);
+      font-weight: var(--font-semibold);
+      color: var(--neutral-800);
+      margin: 0;
+    }
+
+    .building-feature-subtitle {
+      font: var(--text-18px);
+      font-weight: var(--font-regular);
+      color: var(--neutral-600);
+      margin: 0;
+    }
+
+    .btn-go-home {
+      background: var(--primary-600);
+      color: var(--neutral-100);
+      font-size: 16px;
+      font-family: var(--font-secondary);
+      font-weight: var(--font-medium);
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      padding: 14px 32px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-go-home:hover {
+      background: var(--primary-700);
     }
   </style>
 </head>
@@ -1080,31 +1564,338 @@
         <div class="setup-main-content">
           <!-- Colors Tab Content -->
           <div class="tab-content active" id="colorsContent">
-            <div class="tab-content-text">Colors</div>
-          </div>
+            <div class="tab-content-with-sidebar">
+              <div class="tab-content-main-row">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                  <!-- Sidebar Content Container -->
+                  <div class="sidebar-content-container">
+                    <!-- Colors Group -->
+                    <div class="sidebar-colors-group">
+                      <div class="color-item">
+                        <p class="color-item-label">Color 01</p>
+                        <div class="color-input-wrapper">
+                          <input type="text" class="color-hex-input" value="#726BEA" readonly>
+                          <div class="color-preview" style="background-color: #726BEA;"></div>
+                        </div>
+                      </div>
 
-          <!-- Tokens Tab Content -->
-          <div class="tab-content" id="tokensContent">
-            <div class="tab-content-text">Tokens</div>
-          </div>
+                      <div class="color-item">
+                        <p class="color-item-label">Color 02</p>
+                        <div class="color-input-wrapper">
+                          <input type="text" class="color-hex-input" value="#F87171" readonly>
+                          <div class="color-preview" style="background-color: #F87171;"></div>
+                        </div>
+                      </div>
 
-          <!-- Typography Tab Content -->
-          <div class="tab-content" id="typographyContent">
-            <div class="tab-content-text">Typography</div>
-          </div>
+                      <div class="color-item">
+                        <p class="color-item-label">Color 03</p>
+                        <div class="color-input-wrapper">
+                          <input type="text" class="color-hex-input" value="#34D399" readonly>
+                          <div class="color-preview" style="background-color: #34D399;"></div>
+                        </div>
+                      </div>
+                    </div>
 
-          <!-- Components Tab Content -->
-          <div class="tab-content" id="componentsContent">
-            <div class="tab-content-text">Components</div>
-          </div>
+                    <!-- Controls Group (Toggles + Button) -->
+                    <div class="sidebar-controls-group">
+                      <!-- Toggle Items -->
+                      <div class="toggle-item">
+                        <p class="toggle-label">Status Colors</p>
+                        <div class="toggle-switch"></div>
+                      </div>
 
-          <!-- Icon Libraries Tab Content -->
-          <div class="tab-content" id="iconlibrariesContent">
-            <div class="tab-content-text">Icon libraries</div>
+                      <div class="toggle-item">
+                        <p class="toggle-label">Natural Color</p>
+                        <div class="toggle-switch"></div>
+                      </div>
+
+                      <!-- Add Colors Button -->
+                      <button class="btn-add-colors">
+                        <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8.5 10H4.75C4.5375 10 4.3595 9.928 4.216 9.784C4.0725 9.64 4.0005 9.462 4 9.25C3.9995 9.038 4.0715 8.86 4.216 8.716C4.3605 8.572 4.5385 8.5 4.75 8.5H8.5V4.75C8.5 4.5375 8.572 4.3595 8.716 4.216C8.86 4.0725 9.038 4.0005 9.25 4C9.462 3.9995 9.64025 4.0715 9.78475 4.216C9.92925 4.3605 10.001 4.5385 10 4.75V8.5H13.75C13.9625 8.5 14.1408 8.572 14.2848 8.716C14.4288 8.86 14.5005 9.038 14.5 9.25C14.4995 9.462 14.4275 9.64025 14.284 9.78475C14.1405 9.92925 13.9625 10.001 13.75 10H10V13.75C10 13.9625 9.928 14.1408 9.784 14.2848C9.64 14.4288 9.462 14.5005 9.25 14.5C9.038 14.4995 8.86 14.4275 8.716 14.284C8.572 14.1405 8.5 13.9625 8.5 13.75V10Z"
+                            fill="#1350FF" />
+                        </svg>
+                        <span style="margin-left: 8px;">Add Colors</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="main-content-area">
+                  <div class="color-shades-card">
+                    <!-- Card Header -->
+                    <div class="color-shades-header">
+                      <h2 class="color-shades-title">Color 01</h2>
+                      <div class="color-shades-dropdown">
+                        <span>10</span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.11133 5.83398L7.00033 9.72298L10.8893 5.83398" stroke="rgba(0, 0, 0, 0.5)"
+                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <!-- Color Shades Grid -->
+                    <div class="color-shades-grid">
+                      <div class="shade-item">
+                        <div style="background-color: #FFFFFF;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #DCDAFA;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #B9B5F5;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #9590EF;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item selected">
+                        <div style="background-color: #726BEA;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #4F46E5;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #3B35AC;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #282373;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #141239;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #000000;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="color-shades-card">
+                    <!-- Card Header -->
+                    <div class="color-shades-header">
+                      <h2 class="color-shades-title">Color 02</h2>
+                      <div class="color-shades-dropdown">
+                        <span>10</span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.11133 5.83398L7.00033 9.72298L10.8893 5.83398" stroke="rgba(0, 0, 0, 0.5)"
+                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <!-- Color Shades Grid -->
+                    <div class="color-shades-grid">
+                      <div class="shade-item">
+                        <div style="background-color: #FFFFFF;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #FEE2E2;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #FECACA;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #FCA5A5;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item selected">
+                        <div style="background-color: #F87171;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #EF4444;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #DC2626;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #B91C1C;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #991B1B;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #7F1D1D;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="color-shades-card">
+                    <!-- Card Header -->
+                    <div class="color-shades-header">
+                      <h2 class="color-shades-title">Color 03</h2>
+                      <div class="color-shades-dropdown">
+                        <span>10</span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.11133 5.83398L7.00033 9.72298L10.8893 5.83398" stroke="rgba(0, 0, 0, 0.5)"
+                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <!-- Color Shades Grid -->
+                    <div class="color-shades-grid">
+                      <div class="shade-item">
+                        <div style="background-color: #FFFFFF;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #D1FAE5;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #A7F3D0;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #6EE7B7;">
+                          <p class="shade-text" style="color: #141414;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item selected">
+                        <div style="background-color: #34D399;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #10B981;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #059669;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #047857;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #065F46;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                      <div class="shade-item">
+                        <div style="background-color: #064E3B;">
+                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Bottom Action Bar -->
+                  <div class="bottom-action-bar">
+                    <p class="bottom-action-text">Choose brand colors for light and dark.</p>
+                    <button class="btn-add-variables">
+                      <svg class="btn-add-variables-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 3.75V14.25M3.75 9H14.25" stroke="white" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round" />
+                      </svg>
+                      <span class="btn-add-variables-text">Add Variables</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tokens Tab Content -->
+        <div class="tab-content" id="tokensContent">
+          <div class="building-feature-container">
+            <div class="building-feature-emoji">😊</div>
+            <div class="building-feature-text">
+              <h2 class="building-feature-title">We're building this feature.</h2>
+              <p class="building-feature-subtitle">Thanks for using the plugin 🙌</p>
+            </div>
+            <button class="btn-go-home" id="goToHomeBtn">Go to Home Screen</button>
+          </div>
+        </div>
+
+        <!-- Typography Tab Content -->
+        <div class="tab-content" id="typographyContent">
+          <div class="building-feature-container">
+            <div class="building-feature-emoji">😊</div>
+            <div class="building-feature-text">
+              <h2 class="building-feature-title">We're building this feature.</h2>
+              <p class="building-feature-subtitle">Thanks for using the plugin 🙌</p>
+            </div>
+            <button class="btn-go-home">Go to Home Screen</button>
+          </div>
+        </div>
+
+        <!-- Components Tab Content -->
+        <div class="tab-content" id="componentsContent">
+          <div class="building-feature-container">
+            <div class="building-feature-emoji">😊</div>
+            <div class="building-feature-text">
+              <h2 class="building-feature-title">We're building this feature.</h2>
+              <p class="building-feature-subtitle">Thanks for using the plugin 🙌</p>
+            </div>
+            <button class="btn-go-home">Go to Home Screen</button>
+          </div>
+        </div>
+
+        <!-- Icon Libraries Tab Content -->
+        <div class="tab-content" id="iconlibrariesContent">
+          <div class="building-feature-container">
+            <div class="building-feature-emoji">😊</div>
+            <div class="building-feature-text">
+              <h2 class="building-feature-title">We're building this feature.</h2>
+              <p class="building-feature-subtitle">Thanks for using the plugin 🙌</p>
+            </div>
+            <button class="btn-go-home">Go to Home Screen</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <!-- End Manual Setup Screen -->
 
@@ -1199,10 +1990,10 @@
     if (continueBtn) {
       continueBtn.addEventListener('click', function () {
         if (selectedSetup === 'auto') {
-          parent.postMessage({ pluginMessage: { type: 'resize', width: 800, height: 700 } }, '*');
+          parent.postMessage({ pluginMessage: { type: 'resize', width: 900, height: 700 } }, '*');
           showPage(PAGES.AUTO_SETUP);
         } else if (selectedSetup === 'manual') {
-          parent.postMessage({ pluginMessage: { type: 'resize', width: 800, height: 700 } }, '*');
+          parent.postMessage({ pluginMessage: { type: 'resize', width: 900, height: 700 } }, '*');
           showPage(PAGES.MANUAL_SETUP);
         }
       });
@@ -1252,6 +2043,18 @@
         if (activeContent) {
           activeContent.classList.add('active');
         }
+      });
+    });
+
+    /* ========================================
+       TOGGLE SWITCH FUNCTIONALITY
+       Handle toggle switches in sidebar
+       ======================================== */
+    const toggleSwitches = document.querySelectorAll('.toggle-switch');
+
+    toggleSwitches.forEach(toggle => {
+      toggle.addEventListener('click', function () {
+        this.classList.toggle('active');
       });
     });
   </script>
