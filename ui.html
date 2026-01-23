@@ -558,6 +558,18 @@
       border: 1px solid var(--neutral-300);
       border-radius: 24px;
       padding: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) var(--spacing-sm);
+      cursor: pointer;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .color-input-wrapper:hover {
+      border-color: var(--primary-600);
+    }
+
+    .color-input-wrapper.selected {
+      border-width: 1px;
+      padding: calc(var(--spacing-xs) - 1px) calc(var(--spacing-xs) - 1px) calc(var(--spacing-xs) - 1px) calc(var(--spacing-sm) - 1px);
+      background: rgba(255, 255, 255, 0.5);
     }
 
     /* Color Hex Input */
@@ -569,6 +581,7 @@
       font-weight: var(--font-medium);
       color: var(--neutral-1000);
       outline: none;
+      pointer-events: none;
     }
 
     /* Color Preview Circle */
@@ -577,6 +590,372 @@
       height: 32px;
       border-radius: 50%;
       border: 1px solid var(--neutral-300);
+      cursor: pointer;
+    }
+
+    /* Color Name Input */
+    .color-name-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-1000);
+      outline: none;
+    }
+
+    /* Custom Color Picker Modal */
+    .color-picker-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: transparent;
+      display: none;
+      align-items: flex-start;
+      justify-content: flex-start;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .color-picker-modal.active {
+      display: flex;
+      pointer-events: auto;
+    }
+
+    .color-picker-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      pointer-events: auto;
+    }
+
+    .color-picker-container {
+      position: absolute;
+      top: 80px;
+      right: 12px;
+      background: var(--neutral-100);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      width: 320px;
+      max-width: calc(100vw - 274px);
+      pointer-events: auto;
+      z-index: 1001;
+    }
+
+    .color-picker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .color-picker-title {
+      font: var(--text-18px);
+      font-weight: var(--font-semibold);
+      color: var(--neutral-1000);
+      margin: 0;
+    }
+
+    .color-picker-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--neutral-600);
+      cursor: pointer;
+      padding: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      line-height: 1;
+    }
+
+    .color-picker-close:hover {
+      background: var(--neutral-200);
+      color: var(--neutral-1000);
+    }
+
+    /* Color Name Input Container */
+    .color-name-input-container {
+      margin-bottom: 16px;
+    }
+
+    .color-name-label {
+      display: block;
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-1000);
+      margin-bottom: 8px;
+    }
+
+    .color-name-input-field {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--neutral-300);
+      border-radius: 6px;
+      background: var(--neutral-100);
+      font: var(--text-14px);
+      font-weight: var(--font-regular);
+      color: var(--neutral-1000);
+      outline: none;
+      transition: border-color 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .color-name-input-field:hover {
+      border-color: var(--primary-600);
+    }
+
+    .color-name-input-field:focus {
+      border-color: var(--primary-600);
+    }
+
+    .color-name-input-field::placeholder {
+      color: var(--neutral-400);
+    }
+
+    /* 2D Gradient Area */
+    .color-gradient-area {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      cursor: crosshair;
+      border: 1px solid var(--neutral-300);
+    }
+
+    #colorGradientCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .color-picker-handle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--neutral-100);
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Slider Container */
+    .color-slider-container {
+      margin-bottom: 12px;
+    }
+
+    .color-slider-track {
+      position: relative;
+      width: 100%;
+      height: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1px solid var(--neutral-300);
+    }
+
+    /* Hue Slider */
+    .hue-slider {
+      background: linear-gradient(to right,
+          #FF0000 0%,
+          #FFFF00 17%,
+          #00FF00 33%,
+          #00FFFF 50%,
+          #0000FF 67%,
+          #FF00FF 83%,
+          #FF0000 100%);
+    }
+
+    /* Opacity Slider */
+    .opacity-slider {
+      background:
+        linear-gradient(to right, transparent, currentColor),
+        repeating-conic-gradient(#E5E5E5 0% 25%, #FFFFFF 0% 50%) 50% / 10px 10px;
+    }
+
+    .slider-handle {
+      position: absolute;
+      top: 50%;
+      width: 18px;
+      height: 18px;
+      background: var(--neutral-100);
+      border: 2px solid var(--primary-600);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.1s ease;
+    }
+
+    .slider-handle:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .slider-handle:active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Color Inputs Row */
+    .color-inputs-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+
+    .color-mode-dropdown {
+      padding: 8px 10px;
+      border: 1px solid var(--neutral-300);
+      border-radius: 6px;
+      background: var(--neutral-100);
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-1000);
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .color-mode-dropdown:hover {
+      border-color: var(--primary-600);
+    }
+
+    .color-input-field {
+      flex: 1;
+      padding: 8px 6px;
+      border: 1px solid var(--neutral-300);
+      border-radius: 6px;
+      background: var(--neutral-100);
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-1000);
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s ease;
+      -moz-appearance: textfield;
+    }
+
+    .color-input-hex {
+      flex: 2;
+      text-transform: uppercase;
+    }
+
+    .color-input-rgb {
+      flex: 1;
+    }
+
+    .color-input-field:hover {
+      border-color: var(--primary-600);
+    }
+
+    .color-input-field:focus {
+      border-color: var(--primary-600);
+    }
+
+    .color-input-field::-webkit-outer-spin-button,
+    .color-input-field::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .color-input-label {
+      font: var(--text-14px);
+      font-weight: var(--font-medium);
+      color: var(--neutral-600);
+    }
+
+    .color-picker-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .color-picker-btn {
+      flex: 1;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font: var(--text-14px);
+      font-weight: var(--font-semibold);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .color-picker-btn-cancel {
+      background: var(--neutral-200);
+      color: var(--neutral-700);
+      border: 1px solid var(--neutral-300);
+    }
+
+    .color-picker-btn-cancel:hover {
+      background: var(--neutral-300);
+    }
+
+    .color-picker-btn-apply {
+      background: var(--primary-600);
+      color: var(--neutral-100);
+    }
+
+    .color-picker-btn-apply:hover {
+      background: var(--primary-700);
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 4px;
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      min-width: 60px;
+      display: none;
+    }
+
+    .dropdown-menu.active {
+      display: block;
+    }
+
+    .dropdown-item {
+      padding: 8px 12px;
+      font-family: 'Poppins';
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .dropdown-item:first-child {
+      border-radius: 6px 6px 0 0;
+    }
+
+    .dropdown-item:last-child {
+      border-radius: 0 0 6px 6px;
+    }
+
+    /* Color Shades Dropdown Container */
+    .color-shades-dropdown {
+      position: relative;
     }
 
     /* Toggle Container */
@@ -768,6 +1147,38 @@
       width: 100%;
       flex: none;
       align-self: stretch;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    /* Enable scrolling when more than 10 shades */
+    .color-shades-grid.scrollable {
+      overflow-x: auto;
+    }
+
+    /* Custom Scrollbar Styling */
+    .color-shades-grid.scrollable::-webkit-scrollbar {
+      height: 2px;
+    }
+
+    .color-shades-grid.scrollable::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 2px;
+    }
+
+    .color-shades-grid.scrollable::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 2px;
+    }
+
+    .color-shades-grid.scrollable::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Firefox Scrollbar */
+    .color-shades-grid.scrollable {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
     }
 
     /* Individual Shade Item */
@@ -776,10 +1187,10 @@
       flex-direction: row;
       align-items: center;
       padding: 0px;
-      gap: 8px;
       isolation: isolate;
-      height: 57.93px;
-      flex: 1;
+      height: 64px;
+      flex: 1 1 0;
+      min-width: 0;
       position: relative;
     }
 
@@ -788,8 +1199,15 @@
       width: 100%;
       height: 64px;
       border-radius: 4px;
-      flex: 1;
       position: relative;
+    }
+
+    /* Fixed width for scrollable grids */
+    .color-shades-grid.scrollable .shade-item {
+      flex: none;
+      min-width: 64px;
+      max-width: 64px;
+      flex-shrink: 0;
     }
 
     .shade-item:first-child>div {
@@ -1571,28 +1989,12 @@
                   <!-- Sidebar Content Container -->
                   <div class="sidebar-content-container">
                     <!-- Colors Group -->
-                    <div class="sidebar-colors-group">
-                      <div class="color-item">
-                        <p class="color-item-label">Color 01</p>
-                        <div class="color-input-wrapper">
-                          <input type="text" class="color-hex-input" value="#726BEA" readonly>
-                          <div class="color-preview" style="background-color: #726BEA;"></div>
-                        </div>
-                      </div>
-
-                      <div class="color-item">
-                        <p class="color-item-label">Color 02</p>
-                        <div class="color-input-wrapper">
-                          <input type="text" class="color-hex-input" value="#F87171" readonly>
-                          <div class="color-preview" style="background-color: #F87171;"></div>
-                        </div>
-                      </div>
-
-                      <div class="color-item">
-                        <p class="color-item-label">Color 03</p>
-                        <div class="color-input-wrapper">
-                          <input type="text" class="color-hex-input" value="#34D399" readonly>
-                          <div class="color-preview" style="background-color: #34D399;"></div>
+                    <div class="sidebar-colors-group" id="colorsGroup">
+                      <div class="color-item" data-color-id="0">
+                        <p class="color-item-label">Brand Color</p>
+                        <div class="color-input-wrapper selected" data-color-id="0">
+                          <input type="text" class="color-hex-input" value="#1350FF" readonly>
+                          <div class="color-preview" style="background-color: #1350FF;"></div>
                         </div>
                       </div>
                     </div>
@@ -1611,223 +2013,22 @@
                       </div>
 
                       <!-- Add Colors Button -->
-                      <button class="btn-add-colors">
+                      <button class="btn-add-colors" id="addColorBtn">
                         <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M8.5 10H4.75C4.5375 10 4.3595 9.928 4.216 9.784C4.0725 9.64 4.0005 9.462 4 9.25C3.9995 9.038 4.0715 8.86 4.216 8.716C4.3605 8.572 4.5385 8.5 4.75 8.5H8.5V4.75C8.5 4.5375 8.572 4.3595 8.716 4.216C8.86 4.0725 9.038 4.0005 9.25 4C9.462 3.9995 9.64025 4.0715 9.78475 4.216C9.92925 4.3605 10.001 4.5385 10 4.75V8.5H13.75C13.9625 8.5 14.1408 8.572 14.2848 8.716C14.4288 8.86 14.5005 9.038 14.5 9.25C14.4995 9.462 14.4275 9.64025 14.284 9.78475C14.1405 9.92925 13.9625 10.001 13.75 10H10V13.75C10 13.9625 9.928 14.1408 9.784 14.2848C9.64 14.4288 9.462 14.5005 9.25 14.5C9.038 14.4995 8.86 14.4275 8.716 14.284C8.572 14.1405 8.5 13.9625 8.5 13.75V10Z"
                             fill="#1350FF" />
                         </svg>
-                        <span style="margin-left: 8px;">Add Colors</span>
+                        <span style="margin-left: 8px;">Add Color</span>
                       </button>
                     </div>
                   </div>
                 </div>
 
                 <!-- Main Content Area -->
-                <div class="main-content-area">
-                  <div class="color-shades-card">
-                    <!-- Card Header -->
-                    <div class="color-shades-header">
-                      <h2 class="color-shades-title">Color 01</h2>
-                      <div class="color-shades-dropdown">
-                        <span>10</span>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.11133 5.83398L7.00033 9.72298L10.8893 5.83398" stroke="rgba(0, 0, 0, 0.5)"
-                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                      </div>
-                    </div>
+                <div class="main-content-area" id="mainContentArea">
+                  <!-- Color cards will be dynamically generated here -->
 
-                    <!-- Color Shades Grid -->
-                    <div class="color-shades-grid">
-                      <div class="shade-item">
-                        <div style="background-color: #FFFFFF;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #DCDAFA;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #B9B5F5;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #9590EF;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item selected">
-                        <div style="background-color: #726BEA;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #4F46E5;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #3B35AC;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #282373;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #141239;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #000000;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="color-shades-card">
-                    <!-- Card Header -->
-                    <div class="color-shades-header">
-                      <h2 class="color-shades-title">Color 02</h2>
-                      <div class="color-shades-dropdown">
-                        <span>10</span>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.11133 5.83398L7.00033 9.72298L10.8893 5.83398" stroke="rgba(0, 0, 0, 0.5)"
-                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                      </div>
-                    </div>
-
-                    <!-- Color Shades Grid -->
-                    <div class="color-shades-grid">
-                      <div class="shade-item">
-                        <div style="background-color: #FFFFFF;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #FEE2E2;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #FECACA;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #FCA5A5;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item selected">
-                        <div style="background-color: #F87171;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #EF4444;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #DC2626;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #B91C1C;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #991B1B;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #7F1D1D;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="color-shades-card">
-                    <!-- Card Header -->
-                    <div class="color-shades-header">
-                      <h2 class="color-shades-title">Color 03</h2>
-                      <div class="color-shades-dropdown">
-                        <span>10</span>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.11133 5.83398L7.00033 9.72298L10.8893 5.83398" stroke="rgba(0, 0, 0, 0.5)"
-                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                      </div>
-                    </div>
-
-                    <!-- Color Shades Grid -->
-                    <div class="color-shades-grid">
-                      <div class="shade-item">
-                        <div style="background-color: #FFFFFF;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #D1FAE5;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #A7F3D0;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #6EE7B7;">
-                          <p class="shade-text" style="color: #141414;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item selected">
-                        <div style="background-color: #34D399;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #10B981;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #059669;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #047857;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #065F46;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                      <div class="shade-item">
-                        <div style="background-color: #064E3B;">
-                          <p class="shade-text" style="color: #FFFFFF;">Aa</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <!-- Bottom Action Bar -->
                   <div class="bottom-action-bar">
                     <p class="bottom-action-text">Choose brand colors for light and dark.</p>
@@ -1842,6 +2043,66 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Color Picker Modal -->
+        <div class="color-picker-modal" id="colorPickerModal">
+          <div class="color-picker-backdrop" id="colorPickerBackdrop"></div>
+          <div class="color-picker-container" id="colorPickerContainer">
+            <div class="color-picker-header">
+              <h3 class="color-picker-title" id="colorPickerTitle">Choose Color</h3>
+              <button class="color-picker-close" id="colorPickerClose">&times;</button>
+            </div>
+
+            <!-- Color Name Input (only shown when adding new color) -->
+            <div class="color-name-input-container" id="colorNameInputContainer" style="display: none;">
+              <label class="color-name-label">Color Name</label>
+              <input type="text" class="color-name-input-field" id="colorNameInput" placeholder="Enter color name">
+            </div>
+
+            <!-- 2D Gradient Area -->
+            <div class="color-gradient-area" id="colorGradientArea">
+              <canvas id="colorGradientCanvas"></canvas>
+              <div class="color-picker-handle" id="gradientHandle"></div>
+            </div>
+
+            <!-- Hue Slider -->
+            <div class="color-slider-container">
+              <div class="color-slider-track hue-slider" id="hueSlider">
+                <div class="slider-handle" id="hueHandle"></div>
+              </div>
+            </div>
+
+            <!-- Opacity Slider -->
+            <div class="color-slider-container">
+              <div class="color-slider-track opacity-slider" id="opacitySlider">
+                <div class="slider-handle" id="opacityHandle"></div>
+              </div>
+            </div>
+
+            <!-- Color Inputs -->
+            <div class="color-inputs-row">
+              <select class="color-mode-dropdown" id="colorModeDropdown">
+                <option value="hex">HEX</option>
+                <option value="rgb">RGB</option>
+              </select>
+              <input type="text" class="color-input-field color-input-hex" id="colorInputHex" maxlength="7"
+                value="#1350FF">
+              <input type="number" class="color-input-field color-input-rgb" id="colorInput1" min="0" max="255"
+                value="19" style="display: none;">
+              <input type="number" class="color-input-field color-input-rgb" id="colorInput2" min="0" max="255"
+                value="80" style="display: none;">
+              <input type="number" class="color-input-field color-input-rgb" id="colorInput3" min="0" max="255"
+                value="255" style="display: none;">
+              <input type="number" class="color-input-field" id="colorInput4" min="0" max="100" value="100">
+              <span class="color-input-label">%</span>
+            </div>
+
+            <div class="color-picker-actions">
+              <button class="color-picker-btn color-picker-btn-cancel" id="colorPickerCancel">Cancel</button>
+              <button class="color-picker-btn color-picker-btn-apply" id="colorPickerApply">Apply</button>
             </div>
           </div>
         </div>
@@ -2057,6 +2318,691 @@
         this.classList.toggle('active');
       });
     });
+
+    /* ========================================
+       COLOR MANAGEMENT SYSTEM
+       Handle dynamic color creation and shade generation
+       ======================================== */
+
+    // Store colors data
+    let colors = [
+      { id: 0, name: 'Brand Color', hex: '#1350FF', shadeCount: 10 }
+    ];
+    let selectedColorId = 0;
+    let colorIdCounter = 1;
+
+    // Utility: Convert hex to RGB
+    function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    // Utility: Convert RGB to hex
+    function rgbToHex(r, g, b) {
+      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+    }
+
+    // Utility: Calculate luminance
+    function getLuminance(r, g, b) {
+      const a = [r, g, b].map(v => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    }
+
+    // Utility: Determine if color is dark
+    function isDarkColor(hex) {
+      const rgb = hexToRgb(hex);
+      const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
+      return luminance < 0.5;
+    }
+
+    // Generate shades for a color
+    function generateShades(baseHex, count) {
+      const rgb = hexToRgb(baseHex);
+      const isDark = isDarkColor(baseHex);
+      const shades = [];
+
+      // Calculate the position of the base color in the array
+      const basePosition = Math.floor(count / 2);
+
+      for (let i = 0; i < count; i++) {
+        let r, g, b;
+
+        if (i < basePosition) {
+          // Lighter shades
+          const factor = (basePosition - i) / basePosition;
+          r = Math.round(rgb.r + (255 - rgb.r) * factor);
+          g = Math.round(rgb.g + (255 - rgb.g) * factor);
+          b = Math.round(rgb.b + (255 - rgb.b) * factor);
+        } else if (i === basePosition) {
+          // Base color
+          r = rgb.r;
+          g = rgb.g;
+          b = rgb.b;
+        } else {
+          // Darker shades
+          const factor = (i - basePosition) / (count - basePosition - 1);
+          r = Math.round(rgb.r * (1 - factor * 0.9));
+          g = Math.round(rgb.g * (1 - factor * 0.9));
+          b = Math.round(rgb.b * (1 - factor * 0.9));
+        }
+
+        const shadeHex = rgbToHex(r, g, b);
+        const shadeLuminance = getLuminance(r, g, b);
+        const textColor = shadeLuminance > 0.5 ? '#141414' : '#FFFFFF';
+
+        shades.push({
+          hex: shadeHex,
+          textColor: textColor,
+          isBase: i === basePosition
+        });
+      }
+
+      return shades;
+    }
+
+    // Render color card
+    function renderColorCard(color) {
+      const shades = generateShades(color.hex, color.shadeCount);
+      const scrollableClass = color.shadeCount > 10 ? 'scrollable' : '';
+
+      let shadesHTML = '';
+      shades.forEach(shade => {
+        const selectedClass = shade.isBase ? 'selected' : '';
+        shadesHTML += `
+          <div class="shade-item ${selectedClass}">
+            <div style="background-color: ${shade.hex};">
+              <p class="shade-text" style="color: ${shade.textColor};">Aa</p>
+            </div>
+          </div>
+        `;
+      });
+
+      return `
+        <div class="color-shades-card" data-color-id="${color.id}">
+          <div class="color-shades-header">
+            <h2 class="color-shades-title">${color.name}</h2>
+            <div class="color-shades-dropdown">
+              <span class="shade-count-display">${color.shadeCount}</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.11133 5.83398L7.00033 9.72298L10.8893 5.83398" stroke="rgba(0, 0, 0, 0.5)"
+                  stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <div class="dropdown-menu">
+                <div class="dropdown-item" data-count="5">5</div>
+                <div class="dropdown-item" data-count="10">10</div>
+                <div class="dropdown-item" data-count="15">15</div>
+                <div class="dropdown-item" data-count="20">20</div>
+                <div class="dropdown-item" data-count="25">25</div>
+                <div class="dropdown-item" data-count="30">30</div>
+              </div>
+            </div>
+          </div>
+          <div class="color-shades-grid ${scrollableClass}">
+            ${shadesHTML}
+          </div>
+        </div>
+      `;
+    }
+
+    // Render all color cards
+    function renderAllColorCards() {
+      const mainContentArea = document.getElementById('mainContentArea');
+      const bottomBar = mainContentArea.querySelector('.bottom-action-bar');
+
+      // Clear existing cards
+      const existingCards = mainContentArea.querySelectorAll('.color-shades-card');
+      existingCards.forEach(card => card.remove());
+
+      // Render new cards
+      colors.forEach(color => {
+        const cardHTML = renderColorCard(color);
+        bottomBar.insertAdjacentHTML('beforebegin', cardHTML);
+      });
+
+      // Attach dropdown listeners
+      attachDropdownListeners();
+    }
+
+    // Attach dropdown listeners
+    function attachDropdownListeners() {
+      const dropdowns = document.querySelectorAll('.color-shades-dropdown');
+
+      dropdowns.forEach(dropdown => {
+        const menu = dropdown.querySelector('.dropdown-menu');
+        const items = menu.querySelectorAll('.dropdown-item');
+
+        dropdown.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Close all other dropdowns
+          document.querySelectorAll('.dropdown-menu').forEach(m => {
+            if (m !== menu) m.classList.remove('active');
+          });
+          menu.classList.toggle('active');
+        });
+
+        items.forEach(item => {
+          item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const count = parseInt(item.dataset.count);
+            const card = dropdown.closest('.color-shades-card');
+            const colorId = parseInt(card.dataset.colorId);
+
+            // Update color shade count
+            const color = colors.find(c => c.id === colorId);
+            if (color) {
+              color.shadeCount = count;
+              renderAllColorCards();
+            }
+
+            menu.classList.remove('active');
+          });
+        });
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', () => {
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('active'));
+      });
+    }
+
+    // Render sidebar colors
+    function renderSidebarColors() {
+      const colorsGroup = document.getElementById('colorsGroup');
+      colorsGroup.innerHTML = '';
+
+      colors.forEach(color => {
+        const selectedClass = color.id === selectedColorId ? 'selected' : '';
+        const borderColor = color.id === selectedColorId ? color.hex : 'var(--neutral-300)';
+        const bgColor = color.id === selectedColorId ? `${color.hex}10` : 'var(--neutral-100)';
+
+        const colorHTML = `
+          <div class="color-item" data-color-id="${color.id}">
+            <p class="color-item-label">${color.name}</p>
+            <div class="color-input-wrapper ${selectedClass}" data-color-id="${color.id}" style="border-color: ${borderColor}; background: ${bgColor};">
+              <input type="text" class="color-hex-input" value="${color.hex}" readonly>
+              <div class="color-preview" style="background-color: ${color.hex};"></div>
+            </div>
+          </div>
+        `;
+        colorsGroup.insertAdjacentHTML('beforeend', colorHTML);
+      });
+
+      // Attach color selection listeners
+      attachColorSelectionListeners();
+    }
+
+    // Attach color selection listeners
+    function attachColorSelectionListeners() {
+      const colorWrappers = document.querySelectorAll('.color-input-wrapper');
+
+      colorWrappers.forEach(wrapper => {
+        const colorPreview = wrapper.querySelector('.color-preview');
+        const colorId = parseInt(wrapper.dataset.colorId);
+
+        // Click wrapper to select color
+        wrapper.addEventListener('click', function (e) {
+          // Don't select if clicking on color preview (for color picker)
+          if (e.target === colorPreview) return;
+
+          selectedColorId = colorId;
+
+          // Update selected state and border colors
+          document.querySelectorAll('.color-input-wrapper').forEach(w => {
+            w.classList.remove('selected');
+            const wColorId = parseInt(w.dataset.colorId);
+            const wColor = colors.find(c => c.id === wColorId);
+            if (wColor) {
+              w.style.borderColor = 'var(--neutral-300)';
+              w.style.background = 'var(--neutral-100)';
+            }
+          });
+
+          this.classList.add('selected');
+          const selectedColor = colors.find(c => c.id === colorId);
+          if (selectedColor) {
+            this.style.borderColor = selectedColor.hex;
+            this.style.background = `${selectedColor.hex}10`;
+          }
+        });
+
+        // Click color preview to open custom color picker
+        colorPreview.addEventListener('click', function (e) {
+          e.stopPropagation();
+          openColorPicker(colorId);
+        });
+      });
+    }
+
+    // Custom Color Picker with 2D Gradient
+    let currentEditingColorId = null;
+    let isAddingNewColor = false;
+    let currentHue = 240; // Blue hue
+    let currentSaturation = 100;
+    let currentValue = 100;
+    let currentOpacity = 100;
+    let isDraggingGradient = false;
+    let isDraggingHue = false;
+    let isDraggingOpacity = false;
+
+    // HSV to RGB conversion
+    function hsvToRgb(h, s, v) {
+      s /= 100;
+      v /= 100;
+      const c = v * s;
+      const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+      const m = v - c;
+      let r, g, b;
+
+      if (h < 60) { r = c; g = x; b = 0; }
+      else if (h < 120) { r = x; g = c; b = 0; }
+      else if (h < 180) { r = 0; g = c; b = x; }
+      else if (h < 240) { r = 0; g = x; b = c; }
+      else if (h < 300) { r = x; g = 0; b = c; }
+      else { r = c; g = 0; b = x; }
+
+      return {
+        r: Math.round((r + m) * 255),
+        g: Math.round((g + m) * 255),
+        b: Math.round((b + m) * 255)
+      };
+    }
+
+    // RGB to HSV conversion
+    function rgbToHsv(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      const delta = max - min;
+
+      let h = 0;
+      if (delta !== 0) {
+        if (max === r) h = 60 * (((g - b) / delta) % 6);
+        else if (max === g) h = 60 * (((b - r) / delta) + 2);
+        else h = 60 * (((r - g) / delta) + 4);
+      }
+      if (h < 0) h += 360;
+
+      const s = max === 0 ? 0 : (delta / max) * 100;
+      const v = max * 100;
+
+      return { h, s, v };
+    }
+
+    // Draw gradient canvas
+    function drawGradientCanvas() {
+      const canvas = document.getElementById('colorGradientCanvas');
+      const ctx = canvas.getContext('2d');
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+
+      canvas.width = width;
+      canvas.height = height;
+
+      // Draw hue background
+      const hueColor = hsvToRgb(currentHue, 100, 100);
+      ctx.fillStyle = `rgb(${hueColor.r}, ${hueColor.g}, ${hueColor.b})`;
+      ctx.fillRect(0, 0, width, height);
+
+      // White gradient (left to right)
+      const whiteGradient = ctx.createLinearGradient(0, 0, width, 0);
+      whiteGradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      whiteGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = whiteGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // Black gradient (top to bottom)
+      const blackGradient = ctx.createLinearGradient(0, 0, 0, height);
+      blackGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+      blackGradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+      ctx.fillStyle = blackGradient;
+      ctx.fillRect(0, 0, width, height);
+    }
+
+    // Update color from HSV
+    function updateColorFromHSV() {
+      const rgb = hsvToRgb(currentHue, currentSaturation, currentValue);
+      const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+      const mode = document.getElementById('colorModeDropdown').value;
+
+      // Update input fields based on mode
+      if (mode === 'hex') {
+        document.getElementById('colorInputHex').value = hex;
+      } else {
+        document.getElementById('colorInput1').value = rgb.r;
+        document.getElementById('colorInput2').value = rgb.g;
+        document.getElementById('colorInput3').value = rgb.b;
+      }
+      document.getElementById('colorInput4').value = currentOpacity;
+
+      // Update opacity slider color
+      const opacitySlider = document.getElementById('opacitySlider');
+      opacitySlider.style.color = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+    }
+
+    // Update gradient handle position
+    function updateGradientHandle() {
+      const area = document.getElementById('colorGradientArea');
+      const handle = document.getElementById('gradientHandle');
+      const x = (currentSaturation / 100) * area.offsetWidth;
+      const y = ((100 - currentValue) / 100) * area.offsetHeight;
+
+      handle.style.left = `${x}px`;
+      handle.style.top = `${y}px`;
+    }
+
+    // Update hue handle position
+    function updateHueHandle() {
+      const slider = document.getElementById('hueSlider');
+      const handle = document.getElementById('hueHandle');
+      const x = (currentHue / 360) * slider.offsetWidth;
+      handle.style.left = `${x}px`;
+    }
+
+    // Update opacity handle position
+    function updateOpacityHandle() {
+      const slider = document.getElementById('opacitySlider');
+      const handle = document.getElementById('opacityHandle');
+      const x = (currentOpacity / 100) * slider.offsetWidth;
+      handle.style.left = `${x}px`;
+    }
+
+    function openColorPicker(colorId) {
+      currentEditingColorId = colorId;
+      isAddingNewColor = false;
+      const color = colors.find(c => c.id === colorId);
+      if (!color) return;
+
+      const rgb = hexToRgb(color.hex);
+      const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+
+      currentHue = hsv.h;
+      currentSaturation = hsv.s;
+      currentValue = hsv.v;
+      currentOpacity = 100;
+
+      // Set title and hide name input
+      document.getElementById('colorPickerTitle').textContent = 'Choose Color';
+      document.getElementById('colorNameInputContainer').style.display = 'none';
+
+      // Position the modal
+      const colorWrapper = document.querySelector(`.color-input-wrapper[data-color-id="${colorId}"]`);
+      const modal = document.getElementById('colorPickerModal');
+      const container = document.getElementById('colorPickerContainer');
+
+      // Reset transform for absolute positioning
+      container.style.transform = 'none';
+      container.style.right = 'auto';
+
+      if (colorWrapper) {
+        const rect = colorWrapper.getBoundingClientRect();
+        const sidebar = colorWrapper.closest('.sidebar');
+        const sidebarRect = sidebar ? sidebar.getBoundingClientRect() : null;
+
+        if (sidebarRect) {
+          container.style.left = `${sidebarRect.right + 12}px`;
+          container.style.top = `${Math.max(rect.top - 20, 80)}px`;
+        } else {
+          container.style.left = `${rect.right + 12}px`;
+          container.style.top = `${rect.top - 20}px`;
+        }
+      }
+
+      // Show modal first so canvas has dimensions
+      modal.classList.add('active');
+
+      // Use setTimeout to ensure the modal is rendered before drawing
+      setTimeout(() => {
+        // Draw canvas and update UI
+        drawGradientCanvas();
+        updateGradientHandle();
+        updateHueHandle();
+        updateOpacityHandle();
+        updateColorFromHSV();
+      }, 10);
+    }
+
+    function openAddColorPicker() {
+      isAddingNewColor = true;
+      currentEditingColorId = null;
+
+      // Set default color (primary blue)
+      currentHue = 240;
+      currentSaturation = 100;
+      currentValue = 100;
+      currentOpacity = 100;
+
+      // Set title and show name input
+      document.getElementById('colorPickerTitle').textContent = 'Add New Color';
+      document.getElementById('colorNameInputContainer').style.display = 'block';
+      document.getElementById('colorNameInput').value = '';
+
+      // Position the modal at center
+      const modal = document.getElementById('colorPickerModal');
+      const container = document.getElementById('colorPickerContainer');
+
+      container.style.top = '50%';
+      container.style.left = '50%';
+      container.style.right = 'auto';
+      container.style.transform = 'translate(-50%, -50%)';
+
+      // Show modal first so canvas has dimensions
+      modal.classList.add('active');
+
+      // Use setTimeout to ensure the modal is rendered before drawing
+      setTimeout(() => {
+        // Draw canvas and update UI
+        drawGradientCanvas();
+        updateGradientHandle();
+        updateHueHandle();
+        updateOpacityHandle();
+        updateColorFromHSV();
+
+        // Focus on name input
+        document.getElementById('colorNameInput').focus();
+      }, 10);
+    }
+
+    function closeColorPicker() {
+      document.getElementById('colorPickerModal').classList.remove('active');
+      currentEditingColorId = null;
+      isAddingNewColor = false;
+    }
+
+    function applyColorChange() {
+      const rgb = hsvToRgb(currentHue, currentSaturation, currentValue);
+      const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+
+      if (isAddingNewColor) {
+        // Adding new color
+        const colorName = document.getElementById('colorNameInput').value.trim();
+
+        if (!colorName) {
+          alert('Please enter a color name');
+          document.getElementById('colorNameInput').focus();
+          return;
+        }
+
+        const newColor = {
+          id: colorIdCounter++,
+          name: colorName,
+          hex: hex,
+          shadeCount: 10
+        };
+
+        colors.push(newColor);
+        renderSidebarColors();
+        renderAllColorCards();
+      } else if (currentEditingColorId !== null) {
+        // Editing existing color
+        const color = colors.find(c => c.id === currentEditingColorId);
+
+        if (color) {
+          color.hex = hex;
+          renderSidebarColors();
+          renderAllColorCards();
+        }
+      }
+
+      closeColorPicker();
+    }
+
+    // Gradient area interactions
+    const gradientArea = document.getElementById('colorGradientArea');
+    gradientArea.addEventListener('mousedown', (e) => {
+      isDraggingGradient = true;
+      updateGradientFromMouse(e);
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDraggingGradient) updateGradientFromMouse(e);
+      if (isDraggingHue) updateHueFromMouse(e);
+      if (isDraggingOpacity) updateOpacityFromMouse(e);
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDraggingGradient = false;
+      isDraggingHue = false;
+      isDraggingOpacity = false;
+    });
+
+    function updateGradientFromMouse(e) {
+      const rect = gradientArea.getBoundingClientRect();
+      const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+      const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
+
+      currentSaturation = (x / rect.width) * 100;
+      currentValue = 100 - (y / rect.height) * 100;
+
+      updateGradientHandle();
+      updateColorFromHSV();
+    }
+
+    // Hue slider interactions
+    const hueSlider = document.getElementById('hueSlider');
+    hueSlider.addEventListener('mousedown', (e) => {
+      isDraggingHue = true;
+      updateHueFromMouse(e);
+    });
+
+    function updateHueFromMouse(e) {
+      const rect = hueSlider.getBoundingClientRect();
+      const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+
+      currentHue = (x / rect.width) * 360;
+
+      updateHueHandle();
+      drawGradientCanvas();
+      updateColorFromHSV();
+    }
+
+    // Opacity slider interactions
+    const opacitySlider = document.getElementById('opacitySlider');
+    opacitySlider.addEventListener('mousedown', (e) => {
+      isDraggingOpacity = true;
+      updateOpacityFromMouse(e);
+    });
+
+    function updateOpacityFromMouse(e) {
+      const rect = opacitySlider.getBoundingClientRect();
+      const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+
+      currentOpacity = (x / rect.width) * 100;
+
+      updateOpacityHandle();
+      updateColorFromHSV();
+    }
+
+    // Input field changes
+    const colorInputs = [
+      document.getElementById('colorInput1'),
+      document.getElementById('colorInput2'),
+      document.getElementById('colorInput3')
+    ];
+
+    colorInputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        const r = parseInt(colorInputs[0].value) || 0;
+        const g = parseInt(colorInputs[1].value) || 0;
+        const b = parseInt(colorInputs[2].value) || 0;
+
+        const hsv = rgbToHsv(r, g, b);
+        currentHue = hsv.h;
+        currentSaturation = hsv.s;
+        currentValue = hsv.v;
+
+        drawGradientCanvas();
+        updateGradientHandle();
+        updateHueHandle();
+      });
+    });
+
+    // HEX input handler
+    document.getElementById('colorInputHex').addEventListener('input', (e) => {
+      let hex = e.target.value.trim();
+
+      // Ensure it starts with #
+      if (!hex.startsWith('#')) {
+        hex = '#' + hex;
+      }
+
+      // Validate hex format
+      if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+        const rgb = hexToRgb(hex);
+        const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+
+        currentHue = hsv.h;
+        currentSaturation = hsv.s;
+        currentValue = hsv.v;
+
+        drawGradientCanvas();
+        updateGradientHandle();
+        updateHueHandle();
+      }
+    });
+
+    // Color mode dropdown handler
+    document.getElementById('colorModeDropdown').addEventListener('change', (e) => {
+      const mode = e.target.value;
+      const hexInput = document.getElementById('colorInputHex');
+      const rgbInputs = document.querySelectorAll('.color-input-rgb');
+
+      if (mode === 'hex') {
+        hexInput.style.display = 'block';
+        rgbInputs.forEach(input => input.style.display = 'none');
+      } else {
+        hexInput.style.display = 'none';
+        rgbInputs.forEach(input => input.style.display = 'block');
+      }
+
+      updateColorFromHSV();
+    });
+
+    document.getElementById('colorInput4').addEventListener('input', (e) => {
+      currentOpacity = Math.max(0, Math.min(100, parseInt(e.target.value) || 0));
+      updateOpacityHandle();
+    });
+
+    // Button listeners
+    document.getElementById('colorPickerClose').addEventListener('click', closeColorPicker);
+    document.getElementById('colorPickerCancel').addEventListener('click', closeColorPicker);
+    document.getElementById('colorPickerApply').addEventListener('click', applyColorChange);
+    document.getElementById('colorPickerBackdrop').addEventListener('click', closeColorPicker);
+
+    // Add new color
+    document.getElementById('addColorBtn').addEventListener('click', function () {
+      openAddColorPicker();
+    });
+
+    // Initialize
+    renderSidebarColors();
+    renderAllColorCards();
   </script>
 </body>
 
